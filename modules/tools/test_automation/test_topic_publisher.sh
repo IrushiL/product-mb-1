@@ -35,7 +35,7 @@ read messageSize
 
 #set the jmeter.log output filepath.
 publishers_per_topic=`expr $total_publishers / $queues`;
-publishers_resultfile_name=$topic_result_dir/$messageSize\_test_publisher_nodes_$nodes\_topics_$topics\_$publishers_per_topic\_result.txt;
+publishers_resultfile_name=$topic_result_dir/$messageSize\_test_publisher_nodes_$nodes\_topics_$queues\_$publishers_per_topic\_result.txt;
 
 # Start Subscriber script 
 function startScript {
@@ -97,10 +97,10 @@ function addPublishers {
       <hashTree>
         <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="JMS Publisher N${node}-${i}" enabled="true">
           <stringProp name="jms.jndi_properties">false</stringProp>
-          <stringProp name="jms.initial_context_factory">org.wso2.andes.jndi.PropertiesFileInitialContextFactory</stringProp>
-          <stringProp name="jms.provider_url">$jndi_location</stringProp>
-          <stringProp name="jms.connection_factory">TopicConnectionFactory${node_i}</stringProp>
-          <stringProp name="jms.topic">MyTopic${queueNumber}</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.activemq.artemis.jndi.ActiveMQInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">tcp://localhost:61616</stringProp>
+          <stringProp name="jms.connection_factory">TopicConnectionFactory</stringProp>
+          <stringProp name="jms.topic">dynamicTopics/MyTopic${queueNumber}</stringProp>
           <stringProp name="jms.security_principle"></stringProp>
           <stringProp name="jms.security_credentials"></stringProp>
           <stringProp name="jms.text_message"></stringProp>
@@ -113,6 +113,7 @@ function addPublishers {
           <elementProp name="jms.jmsProperties" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
+          <stringProp name="jms.file_encoding">UTF-8</stringProp>
         </PublisherSampler>
         <hashTree/>
       </hashTree>
@@ -141,7 +142,6 @@ endScript $publisher_outfile_name
 
 if [ "$is_mock_run" == "false" ]; then
 	nohup $jmeterBinary -n -t $publisher_outfile_name > $publishers_resultfile_name &
-
 	echo -e "\nJmeter Log output ...\n"
 	tail -f $publishers_resultfile_name
 fi

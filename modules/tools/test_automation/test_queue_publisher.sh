@@ -97,10 +97,10 @@ function addPublishers {
       <hashTree>
         <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="JMS Publisher N${node}-${i}" enabled="true">
           <stringProp name="jms.jndi_properties">false</stringProp>
-          <stringProp name="jms.initial_context_factory">org.wso2.andes.jndi.PropertiesFileInitialContextFactory</stringProp>
-          <stringProp name="jms.provider_url">$jndi_location</stringProp>
-          <stringProp name="jms.connection_factory">QueueConnectionfactory${node_i}</stringProp>
-          <stringProp name="jms.topic">MyQueue${queueNumber}</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.activemq.artemis.jndi.ActiveMQInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">tcp://localhost:61616</stringProp>
+          <stringProp name="jms.connection_factory">ConnectionFactory</stringProp>
+          <stringProp name="jms.topic">dynamicQueues/MyQueue${queueNumber}</stringProp>
           <stringProp name="jms.security_principle"></stringProp>
           <stringProp name="jms.security_credentials"></stringProp>
           <stringProp name="jms.text_message"></stringProp>
@@ -113,6 +113,10 @@ function addPublishers {
           <elementProp name="jms.jmsProperties" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
+          <stringProp name="jms.expiration"></stringProp>
+          <stringProp name="jms_error_reconnect_on_codes"></stringProp>
+          <stringProp name="jms.priority"></stringProp>
+          <stringProp name="jms.file_encoding">UTF-8</stringProp>
         </PublisherSampler>
         <hashTree/>
       </hashTree>

@@ -69,8 +69,6 @@ else
 			send -- "$num_nodes\n"
 			expect "Number of publishers for node 1:"
 			send -- "$num_clients_for_node_1\n"
-			expect "Number of publishers for node 2:"
-			send -- "$num_clients_for_node_2\n"
 			expect "Number of messages per publisher:"
 			send -- "$num_messages_per_client\n"
 			expect "Maximum publisher TPS:"
@@ -89,6 +87,7 @@ EOF
 				break;
 			fi
 			publisher_resultfile_name=$topic_result_dir/$message_size\_test_publisher_nodes_$num_nodes\_topics_$num_topics\_${pubs[$k]}\_result.txt;
+			echo "****************************$publisher_resultfile_name"
 			writeResult $publisher_resultfile_name $num_messages;
 			logPubTestEnd
 		done

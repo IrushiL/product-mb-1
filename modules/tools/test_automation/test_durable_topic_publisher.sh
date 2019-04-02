@@ -98,10 +98,10 @@ function addPublishers {
       <hashTree>
         <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="JMS Publisher N${node}-${i}" enabled="true">
           <stringProp name="jms.jndi_properties">false</stringProp>
-          <stringProp name="jms.initial_context_factory">org.wso2.andes.jndi.PropertiesFileInitialContextFactory</stringProp>
-          <stringProp name="jms.provider_url">$jndi_location</stringProp>
-          <stringProp name="jms.connection_factory">TopicConnectionFactory${node_i}</stringProp>
-          <stringProp name="jms.topic">MyTopic${queueNumber}</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.activemq.artemis.jndi.ActiveMQInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">tcp://localhost:61616</stringProp>
+          <stringProp name="jms.connection_factory">TopicConnectionFactory</stringProp>
+          <stringProp name="jms.topic">dynamicTopics/MyTopic${queueNumber}</stringProp>
           <stringProp name="jms.security_principle"></stringProp>
           <stringProp name="jms.security_credentials"></stringProp>
           <stringProp name="jms.text_message"></stringProp>

@@ -15,13 +15,13 @@ num_num_messages=${#messages[@]};
 last_num_messages_index=`expr $num_num_messages - 1`;
 
 # set the queue scenarios
-queues=(5 10 20 50 100);
+queues=(1 10 50 100);
 num_queue_sizes=${#queues[@]};
 last_num_queue_index=`expr $num_queue_sizes - 1`;
 
 num_pub_tps=${#publisher_tps[@]};
 
-expected_num_pub_tps=`expr $num_queue_sizes \\* $num_num_messages`;
+expected_num_pub_tps=`expr $Queues message_size \\* $num_num_messages`;
 
 if [ "$num_pub_tps" -ne "$expected_num_pub_tps" ]; then
         echo "Incorrect message tps size"
@@ -52,8 +52,6 @@ else
 			send -- "$num_nodes\n"
 			expect "Number of publishers for node 1:"
 			send -- "$num_clients_for_node_1\n"
-			expect "Number of publishers for node 2:"
-			send -- "$num_clients_for_node_2\n"
 			expect "Number of messages per publisher:"
 			send -- "$num_messages_per_client\n"
 			expect "Maximum publisher TPS:"

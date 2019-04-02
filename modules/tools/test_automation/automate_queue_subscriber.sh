@@ -43,8 +43,6 @@ for i in $(seq $starting_message_size_index $last_num_messages_index); do
 		send -- "$num_nodes\n"
 		expect "Number of subscribers for node 1:"
 		send -- "$num_clients_for_node_1\n"
-		expect "Number of subscribers for node 2:"
-		send -- "$num_clients_for_node_2\n"
 		expect "Number of messages per subscriber:"
 		send -- "$num_messages_per_client\n"
 		expect "Message size (1KB):"

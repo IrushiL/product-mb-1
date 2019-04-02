@@ -11,7 +11,7 @@ declare -A nodeUrls=()
 total_publishers=0
 total_subscribers=0
 
-echo -n "Number of queus: "
+echo -n "Number of queues: "
 read queues
 
 echo -n "Number of nodes: "
@@ -108,10 +108,10 @@ function addSubscribers {
       <hashTree>
         <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="JMS Subscriber N${node}-${i}" enabled="true">
           <stringProp name="jms.jndi_properties">false</stringProp>
-          <stringProp name="jms.initial_context_factory">org.wso2.andes.jndi.PropertiesFileInitialContextFactory</stringProp>
-          <stringProp name="jms.provider_url">$jndi_location</stringProp>
-          <stringProp name="jms.connection_factory">QueueConnectionfactory${node_i}</stringProp>
-          <stringProp name="jms.topic">MyQueue${queueNumber}</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.activemq.artemis.jndi.ActiveMQInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">tcp://localhost:61616</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionfactory</stringProp>
+          <stringProp name="jms.topic">dynamicQueues/MyQueue${queueNumber}</stringProp>
           <stringProp name="jms.security_principle"></stringProp>
           <stringProp name="jms.security_credentials"></stringProp>
           <boolProp name="jms.authenticate">false</boolProp>
@@ -158,10 +158,10 @@ function addPublishers {
       <hashTree>
         <PublisherSampler guiclass="JMSPublisherGui" testclass="PublisherSampler" testname="JMS Publisher N${node}-${i}" enabled="true">
           <stringProp name="jms.jndi_properties">false</stringProp>
-          <stringProp name="jms.initial_context_factory">org.wso2.andes.jndi.PropertiesFileInitialContextFactory</stringProp>
-          <stringProp name="jms.provider_url">$jndi_location</stringProp>
-          <stringProp name="jms.connection_factory">QueueConnectionfactory${node_i}</stringProp>
-          <stringProp name="jms.topic">MyQueue${queueNumber}</stringProp>
+          <stringProp name="jms.initial_context_factory">org.apache.activemq.artemis.jndi.ActiveMQInitialContextFactory</stringProp>
+          <stringProp name="jms.provider_url">tcp://localhost:61616</stringProp>
+          <stringProp name="jms.connection_factory">QueueConnectionfactory</stringProp>
+          <stringProp name="jms.topic">dynamicQueues/MyQueue${queueNumber}</stringProp>
           <stringProp name="jms.security_principle"></stringProp>
           <stringProp name="jms.security_credentials"></stringProp>
           <stringProp name="jms.text_message"></stringProp>

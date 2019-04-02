@@ -90,10 +90,10 @@ function addSubscribers {
     <hashTree>
       <SubscriberSampler guiclass="JMSSubscriberGui" testclass="SubscriberSampler" testname="JMS Subscriber ${i}" enabled="true">
         <stringProp name="jms.jndi_properties">false</stringProp>
-        <stringProp name="jms.initial_context_factory">org.wso2.andes.jndi.PropertiesFileInitialContextFactory</stringProp>
-        <stringProp name="jms.provider_url">$jndi_location</stringProp>
-        <stringProp name="jms.connection_factory">TopicConnectionFactory${node_i}</stringProp>
-        <stringProp name="jms.topic">MyTopic${queueNumber}</stringProp>
+        <stringProp name="jms.initial_context_factory">org.apache.activemq.artemis.jndi.ActiveMQInitialContextFactory</stringProp>
+        <stringProp name="jms.provider_url">tcp://localhost:61616</stringProp>
+        <stringProp name="jms.connection_factory">TopicConnectionFactory</stringProp>
+        <stringProp name="jms.topic">dynamicTopics/MyTopic${queueNumber}</stringProp>
         <stringProp name="jms.security_principle"></stringProp>
         <stringProp name="jms.security_credentials"></stringProp>
         <boolProp name="jms.authenticate">false</boolProp>
